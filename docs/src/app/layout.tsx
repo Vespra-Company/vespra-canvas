@@ -17,18 +17,17 @@ const geist = Geist({
 export const metadata = {
     metadataBase: new URL('https://docs.onlook.dev'),
     title: {
-        default: 'Onlook Docs',
-        template: '%s – Onlook Docs',
+        default: 'Vespra Canvas Docs',
+        template: '%s – Vespra Canvas Docs',
     },
     description:
-        'Official documentation for Onlook – an open-source "Cursor for Designers" that lets you visually edit React & Tailwind projects.',
+        'Official documentation for Vespra Canvas – an open-source "Cursor for Designers" that lets you visually edit React & Tailwind projects.',
     openGraph: {
-        siteName: 'Onlook Docs',
+        siteName: 'Vespra Canvas Docs',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        site: '@onlookdev',
     },
     robots: {
         index: true,

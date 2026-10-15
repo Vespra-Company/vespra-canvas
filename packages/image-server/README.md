@@ -1,6 +1,6 @@
 # @onlook/image-server
 
-Server-side image processing utilities for Onlook using Sharp.
+Server-side image processing utilities for Vespra Canvas using Sharp.
 
 ## ⚠️ IMPORTANT WARNING
 
@@ -11,7 +11,7 @@ Server-side image processing utilities for Onlook using Sharp.
 
 ## Installation
 
-This package is part of the Onlook monorepo and should be added as a dependency to packages that need server-side image processing.
+This package is part of the Vespra Canvas monorepo and should be added as a dependency to packages that need server-side image processing.
 
 ```json
 {

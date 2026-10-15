@@ -22,13 +22,13 @@ export function useGitHubStats() {
         const fetchStats = async () => {
             try {
                 // Stars
-                const repoResponse = await fetch('https://api.github.com/repos/onlook-dev/onlook');
+                const repoResponse = await fetch('https://api.github.com/repos/Vespra-Company/vespra-canvas');
                 const repoData = await repoResponse.json();
                 setRaw(repoData.stargazers_count);
                 setFormatted(formatStarCount(repoData.stargazers_count));
 
                 // Contributors (use the Link header for pagination)
-                const contribResponse = await fetch('https://api.github.com/repos/onlook-dev/onlook/contributors?per_page=1&anon=true');
+                const contribResponse = await fetch('https://api.github.com/repos/Vespra-Company/vespra-canvas/contributors?per_page=1&anon=true');
                 const linkHeader = contribResponse.headers.get('Link');
                 if (linkHeader) {
                     const match = linkHeader.match(/&page=(\d+)>; rel="last"/);
@@ -56,7 +56,7 @@ export function useGitHubStats() {
 export function GitHubButton() {
     const { formatted } = useGitHubStats();
     return (
-        <a href="https://github.com/onlook-dev/onlook" className="flex items-center gap-1.5 text-small hover:opacity-80" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/Vespra-Company/vespra-canvas" className="flex items-center gap-1.5 text-small hover:opacity-80" target="_blank" rel="noopener noreferrer">
             <Icons.GitHubLogo className="h-5 w-5" />
             <span className="transition-all duration-300">{formatted}</span>
         </a>

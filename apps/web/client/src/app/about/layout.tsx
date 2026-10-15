@@ -99,7 +99,7 @@ const organizationJsonLd = {
         addressCountry: 'US',
     },
     sameAs: [
-        'https://github.com/onlook-dev/onlook',
+        'https://github.com/Vespra-Company/vespra-canvas',
         'https://x.com/onlookdev',
         'https://www.linkedin.com/company/onlook-dev/',
         'https://discord.gg/ZZzadNQtns',
