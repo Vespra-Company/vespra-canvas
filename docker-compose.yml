@@ -5,6 +5,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # NEXT_PUBLIC_* is inlined at build time. Compose interpolates these from
+      # the shell or from `docker compose --env-file apps/web/client/.env`.
+      # Server secrets stay in env_file and are not passed as build args.
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY:-}
+        NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST:-}
+        NEXT_PUBLIC_GLEAP_API_KEY: ${NEXT_PUBLIC_GLEAP_API_KEY:-}
+        NEXT_PUBLIC_FEATURE_COLLABORATION: ${NEXT_PUBLIC_FEATURE_COLLABORATION:-}
+        NEXT_PUBLIC_HOSTING_DOMAIN: ${NEXT_PUBLIC_HOSTING_DOMAIN:-}
+        NEXT_PUBLIC_RB2B_ID: ${NEXT_PUBLIC_RB2B_ID:-}
     env_file:
       - apps/web/client/.env
     ports:

@@ -9,15 +9,20 @@ import './src/env';
 
 const nextConfig: NextConfig = {
     devIndicators: false,
-    ...(process.env.STANDALONE_BUILD === 'true' && { output: 'standalone' }),
-    eslint: {
-        // Don't run ESLint during builds - handle it separately in CI
-        ignoreDuringBuilds: true,
-    },
 };
 
-if (process.env.NODE_ENV === 'development') {
-    nextConfig.outputFileTracingRoot = path.join(__dirname, '../../..');
+// Monorepo root. Standalone tracing has to start here so workspace packages
+// land in the Docker output at apps/web/client/.next/standalone/apps/web/client.
+const repoRoot = path.join(__dirname, '../../..');
+
+if (process.env.STANDALONE_BUILD === 'true') {
+    nextConfig.output = 'standalone';
+    nextConfig.outputFileTracingRoot = repoRoot;
+    nextConfig.outputFileTracingIncludes = {
+        '/*': ['./messages/**/*.json'],
+    };
+} else if (process.env.NODE_ENV === 'development') {
+    nextConfig.outputFileTracingRoot = repoRoot;
 }
 
 const withNextIntl = createNextIntlPlugin({

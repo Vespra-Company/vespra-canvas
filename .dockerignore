@@ -1,26 +1,30 @@
-node_modules
+# Dependencies and build output are installed or produced inside the image.
+**/node_modules
+**/.next
+**/dist
+**/build
+**/coverage
+**/.turbo
+**/storybook-static
+**/*.tsbuildinfo
+**/*.log
+
+# Secrets and env examples. NEXT_PUBLIC_* values are passed as build args
+# or a BuildKit secret. Never copy env files into the image.
+**/.env
+**/.env.*
+
 .git
-.gitignore
-README.md
-.env
-.env.local
-.env.*.local
+.github
+.vscode
+.idea
+.cursor
+**/.DS_Store
+
+# Not needed to build the web client.
+apps/backend/supabase
+**/.supabase
+agent-transcripts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.next
-.vercel
-*.tsbuildinfo
-.DS_Store
-coverage
-.nyc_output
-dist
-build
-.vscode
-.idea
-*.log
-.next
-
-# Parts of the app that does not need to be deployed
-apps/web/backend
-assets

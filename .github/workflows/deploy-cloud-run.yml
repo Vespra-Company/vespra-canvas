@@ -1,0 +1,221 @@
+# Manual Cloud Run deploy. workflow_dispatch only — pushes and pull requests
+# do not build or deploy. Authentication is Workload Identity Federation.
+# There is no JSON service-account key.
+
+name: Deploy Cloud Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Artifact Registry tag (defaults to the git SHA)
+        required: false
+        type: string
+
+concurrency:
+  group: cloud-run-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  GCP_REGION: us-east1
+  GAR_REPOSITORY: vespra-canvas
+  CLOUD_RUN_SERVICE: vespra-canvas
+  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  GCP_DEPLOYER_SERVICE_ACCOUNT: ${{ vars.GCP_DEPLOYER_SERVICE_ACCOUNT }}
+  GCP_RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_RUNTIME_SERVICE_ACCOUNT }}
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check repository variables
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in GCP_PROJECT_ID GCP_WORKLOAD_IDENTITY_PROVIDER GCP_DEPLOYER_SERVICE_ACCOUNT GCP_RUNTIME_SERVICE_ACCOUNT; do
+            if [ -z "${!name}" ]; then
+              echo "GitHub variable $name is empty. See docs/deploy-cloud-run.md." >&2
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_DEPLOYER_SERVICE_ACCOUNT }}
+          project_id: ${{ env.GCP_PROJECT_ID }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Artifact Registry docker auth
+        run: gcloud auth configure-docker "${GCP_REGION}-docker.pkg.dev" --quiet
+
+      - name: Read public build-time values from Secret Manager
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/public"
+          chmod 700 "$RUNNER_TEMP/public"
+          required=(
+            NEXT_PUBLIC_SUPABASE_URL
+            NEXT_PUBLIC_SUPABASE_ANON_KEY
+            NEXT_PUBLIC_SITE_URL
+          )
+          optional=(
+            NEXT_PUBLIC_POSTHOG_KEY
+            NEXT_PUBLIC_POSTHOG_HOST
+            NEXT_PUBLIC_GLEAP_API_KEY
+            NEXT_PUBLIC_FEATURE_COLLABORATION
+            NEXT_PUBLIC_HOSTING_DOMAIN
+            NEXT_PUBLIC_RB2B_ID
+          )
+          for name in "${required[@]}"; do
+            if ! gcloud secrets versions access latest --secret="$name" --project="$GCP_PROJECT_ID" > "$RUNNER_TEMP/public/$name"; then
+              echo "Could not read required secret $name" >&2
+              exit 1
+            fi
+            if [ ! -s "$RUNNER_TEMP/public/$name" ]; then
+              echo "Required secret $name is empty" >&2
+              exit 1
+            fi
+          done
+          for name in "${optional[@]}"; do
+            if gcloud secrets describe "$name" --project="$GCP_PROJECT_ID" >/dev/null 2>&1; then
+              gcloud secrets versions access latest --secret="$name" --project="$GCP_PROJECT_ID" > "$RUNNER_TEMP/public/$name"
+            else
+              echo "Optional public secret $name is not in Secret Manager; the client bundle will omit it."
+            fi
+          done
+          python3 - <<'PY'
+          import os
+          import pathlib
+          root = pathlib.Path(os.environ["RUNNER_TEMP"]) / "public"
+          lines = []
+          for path in sorted(root.iterdir()):
+              if not path.is_file():
+                  continue
+              value = path.read_text()
+              if value.endswith("\n"):
+                  value = value[:-1]
+              escaped = value.replace("'", "'\"'\"'")
+              lines.append(f"{path.name}='{escaped}'")
+          dest = pathlib.Path(os.environ["RUNNER_TEMP"]) / "public.env"
+          dest.write_text("\n".join(lines) + "\n")
+          os.chmod(dest, 0o600)
+          PY
+
+      - name: Build and push image
+        env:
+          IMAGE_TAG_INPUT: ${{ inputs.image_tag }}
+          DOCKER_BUILDKIT: "1"
+        run: |
+          set -euo pipefail
+          tag="${IMAGE_TAG_INPUT:-$GITHUB_SHA}"
+          image="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/${GAR_REPOSITORY}/web"
+          docker build \
+            --secret "id=public_env,src=${RUNNER_TEMP}/public.env" \
+            --build-arg REQUIRE_PUBLIC_ENV=1 \
+            --tag "${image}:${tag}" \
+            --tag "${image}:latest" \
+            .
+          docker push "${image}:${tag}"
+          docker push "${image}:latest"
+          echo "image=${image}:${tag}" >> "$GITHUB_ENV"
+
+      - name: Deploy to Cloud Run
+        run: |
+          set -euo pipefail
+          required=(
+            CSB_API_KEY
+            SUPABASE_DATABASE_URL
+            SUPABASE_SERVICE_ROLE_KEY
+            OPENROUTER_API_KEY
+            NEXT_PUBLIC_SUPABASE_URL
+            NEXT_PUBLIC_SUPABASE_ANON_KEY
+            NEXT_PUBLIC_SITE_URL
+          )
+          optional=(
+            RESEND_API_KEY
+            FREESTYLE_API_KEY
+            STRIPE_WEBHOOK_SECRET
+            STRIPE_SECRET_KEY
+            MORPH_API_KEY
+            RELACE_API_KEY
+            AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY
+            AWS_REGION
+            GOOGLE_CLIENT_EMAIL
+            GOOGLE_PRIVATE_KEY
+            GOOGLE_PRIVATE_KEY_ID
+            ANTHROPIC_API_KEY
+            GOOGLE_AI_STUDIO_API_KEY
+            OPENAI_API_KEY
+            N8N_WEBHOOK_URL
+            N8N_API_KEY
+            N8N_LANDING_FORM_URL
+            N8N_LANDING_FORM_HEADER_NAME
+            N8N_LANDING_FORM_HEADER_VALUE
+            FIRECRAWL_API_KEY
+            EXA_API_KEY
+            LANGFUSE_SECRET_KEY
+            LANGFUSE_PUBLIC_KEY
+            LANGFUSE_BASEURL
+            GITHUB_APP_ID
+            GITHUB_APP_PRIVATE_KEY
+            GITHUB_APP_SLUG
+            NEXT_PUBLIC_POSTHOG_KEY
+            NEXT_PUBLIC_POSTHOG_HOST
+            NEXT_PUBLIC_GLEAP_API_KEY
+            NEXT_PUBLIC_FEATURE_COLLABORATION
+            NEXT_PUBLIC_HOSTING_DOMAIN
+            NEXT_PUBLIC_RB2B_ID
+          )
+          secret_args=()
+          for name in "${required[@]}"; do
+            if ! gcloud secrets describe "$name" --project="$GCP_PROJECT_ID" >/dev/null 2>&1; then
+              echo "Missing required secret $name" >&2
+              exit 1
+            fi
+            secret_args+=("${name}=${name}:latest")
+          done
+          for name in "${optional[@]}"; do
+            if gcloud secrets describe "$name" --project="$GCP_PROJECT_ID" >/dev/null 2>&1; then
+              secret_args+=("${name}=${name}:latest")
+            else
+              echo "Optional secret $name is not in Secret Manager; Cloud Run will not set it."
+            fi
+          done
+          IFS=,
+          joined="${secret_args[*]}"
+          unset IFS
+          gcloud run deploy "$CLOUD_RUN_SERVICE" \
+            --project="$GCP_PROJECT_ID" \
+            --region="$GCP_REGION" \
+            --image="$image" \
+            --service-account="$GCP_RUNTIME_SERVICE_ACCOUNT" \
+            --execution-environment=gen2 \
+            --min-instances=0 \
+            --max-instances=4 \
+            --cpu=1 \
+            --memory=1Gi \
+            --port=8080 \
+            --timeout=300 \
+            --concurrency=20 \
+            --cpu-boost \
+            --allow-unauthenticated \
+            --quiet \
+            --set-env-vars=NODE_ENV=production \
+            --set-secrets="$joined"
+          gcloud run services describe "$CLOUD_RUN_SERVICE" \
+            --project="$GCP_PROJECT_ID" \
+            --region="$GCP_REGION" \
+            --format='value(status.url)'
