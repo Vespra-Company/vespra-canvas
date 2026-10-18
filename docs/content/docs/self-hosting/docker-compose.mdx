@@ -71,8 +71,10 @@ bun db:push
 Deploy the production container from the repository root:
 
 ```bash
-docker-compose up -d
+docker compose --env-file apps/web/client/.env up -d --build
 ```
+
+`NEXT_PUBLIC_*` values are inlined when the image builds. The `--env-file` flag supplies them to the build. Server secrets in that same file are injected at runtime and are not image build args.
 
 This builds and starts:
 - **Web Application**: Production-built Next.js application (port 3000)
