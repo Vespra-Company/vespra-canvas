@@ -1,6 +1,6 @@
-# Onlook Documentation
+# Vespra Canvas Documentation
 
-This is a Next.js application for the Onlook documentation.
+This is a Next.js application for the Vespra Canvas documentation.
 
 Run development server:
 
@@ -34,8 +34,8 @@ In the project, you can see:
 The documentation is organized into the following sections:
 
 - **Getting Started**: Quick introduction and installation guides
-- **User Guide**: Comprehensive guide for using Onlook
-- **Features**: Detailed description of Onlook's features
+- **User Guide**: Comprehensive guide for using Vespra Canvas
+- **Features**: Detailed description of Vespra Canvas's features
 - **Tutorials**: Step-by-step guides for common tasks
 - **Developer Documentation**: Technical documentation for contributors
 

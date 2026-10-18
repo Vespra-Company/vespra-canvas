@@ -1,11 +1,11 @@
 ---
 title: External Services
-description: External services for Onlook
+description: External services for Vespra Canvas
 ---
 
 # External Services
 
-Onlook requires several external services to provide its features. Each of these services is self-hostable under Apache 2.0 or equivalently permissive licenses.
+Vespra Canvas requires several external services to provide its features. Each of these services is self-hostable under Apache 2.0 or equivalently permissive licenses.
 
 ## Self-hosting External Services
 
@@ -21,8 +21,8 @@ For assistance with self-hosting these services, please contact us at [founders@
 
 ### 3. AI Providers
 To configure custom AI providers:
-1. Update the providers in [`packages/ai/src/chat/providers.ts`](https://github.com/onlook-dev/onlook/blob/main/packages/ai/src/chat/providers.ts). We already support Anthropic and OpenRouter as examples. You can follow the same format to add a new provider.
-2. Update the usages by searching for [`initModel`](https://github.com/search?q=repo%3Aonlook-dev%2Fonlook+%22await+initModel%22&type=code)
+1. Update the providers in [`packages/ai/src/chat/providers.ts`](https://github.com/Vespra-Company/vespra-canvas/blob/main/packages/ai/src/chat/providers.ts). We already support Anthropic and OpenRouter as examples. You can follow the same format to add a new provider.
+2. Update the usages by searching for [`initModel`](https://github.com/search?q=repo%3AVespra-Company%2Fvespra-canvas+%22await+initModel%22&type=code)
 3. Update your API keys in the `apps/web/client/.env` file to the provider's expected API keys.
 
 Note: We support any provider from the [AI SDK providers](https://ai-sdk.dev/providers/ai-sdk-providers). You can add a custom provider by following these AI SDK provider guides: [OpenAI compatible](https://ai-sdk.dev/providers/openai-compatible-providers/custom-providers) and [Community](https://ai-sdk.dev/providers/community-providers/custom-providers).
