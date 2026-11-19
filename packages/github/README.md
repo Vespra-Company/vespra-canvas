@@ -1,6 +1,6 @@
 # @onlook/github
 
-GitHub integration package for Onlook.
+GitHub integration package for Vespra Canvas.
 
 ## Setup
 

@@ -41,7 +41,7 @@ export default function DemoOnlyPage() {
                         <p className="text-foreground-secondary text-regular max-w-lg text-balance">
                             Get the most out of Onlook with a personalized onboarding session. Book a demo with our team to get started, or{' '}
                             <a
-                                href="https://github.com/onlook-dev/onlook"
+                                href="https://github.com/Vespra-Company/vespra-canvas"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-primary hover:underline"

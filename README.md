@@ -1,27 +1,21 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 <div align="center">
-<img width="800" alt="header image" src="assets/web-preview.png">
-<h3 align="center">Onlook</h3>
+<h3 align="center">Vespra Canvas</h3>
   <p align="center">
-    <strong>The design tool for AI-native designers — now in early access.</strong>
+    <strong>The design tool for AI-native designers.</strong>
     <br />
-    Onlook makes designing on top of your codebase effortless. Craft exceptional experiences with AI in code.
+    Vespra Canvas makes designing on top of your codebase effortless. Craft exceptional experiences with AI in code.
     <br />
     <br />
-    <a href="https://www.onlook.com/waitlist?utm_source=github&utm_medium=readme&utm_campaign=waitlist-2026"><strong>→ Join the waitlist</strong></a>
+    <a href="https://github.com/Vespra-Company/vespra-canvas"><strong>→ View the repository</strong></a>
   </p>
   <p align="center">
-    👨‍💻👩‍💻👨‍💻
-    <a href="https://www.ycombinator.com/companies/onlook/jobs/e4gHv1n-founding-engineer-fullstack">We're hiring engineers in SF!</a>
-    👩‍💻👨‍💻👩‍💻
-  </p>
-    <br />
     <a href="https://youtu.be/RSX_3EaO5eU?feature=shared">View Demo</a>
     ·
-    <a href="https://github.com/onlook-dev/onlook/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/Vespra-Company/vespra-canvas/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/onlook-dev/onlook/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/Vespra-Company/vespra-canvas/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
   <!-- PROJECT SHIELDS -->
 <!--
@@ -38,21 +32,19 @@
 [![Apache License][license-shield]][license-url] -->
 
 [![Discord][discord-shield]][discord-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![Twitter][twitter-shield]][twitter-url]
 
-[中文](https://www.readme-i18n.com/onlook-dev/onlook?lang=zh) |
-[Español](https://www.readme-i18n.com/onlook-dev/onlook?lang=es) |
-[Deutsch](https://www.readme-i18n.com/onlook-dev/onlook?lang=de) |
-[français](https://www.readme-i18n.com/onlook-dev/onlook?lang=fr) |
-[Português](https://www.readme-i18n.com/onlook-dev/onlook?lang=pt) |
-[Русский](https://www.readme-i18n.com/onlook-dev/onlook?lang=ru) |
-[日本語](https://www.readme-i18n.com/onlook-dev/onlook?lang=ja) |
-[한국어](https://www.readme-i18n.com/onlook-dev/onlook?lang=ko)
+[中文](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=zh) |
+[Español](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=es) |
+[Deutsch](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=de) |
+[français](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=fr) |
+[Português](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=pt) |
+[Русский](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=ru) |
+[日本語](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=ja) |
+[한국어](https://www.readme-i18n.com/Vespra-Company/vespra-canvas?lang=ko)
 
 </div>
 
-> This is the open-source visual editor that started Onlook (Next.js + Tailwind). The hosted product we're building next, for AI-native designers, is in early access via the [waitlist](https://www.onlook.com/waitlist?utm_source=github&utm_medium=readme&utm_campaign=waitlist-2026) above.
+> Vespra Canvas is a fork of Onlook by onlook-dev. See [NOTICE](NOTICE) and [LICENSE.md](LICENSE.md).
 
 
 # An Open-Source, Visual-First Code Editor
@@ -63,7 +55,7 @@ code. An open-source alternative to Bolt.new, Lovable, V0, Replit Agent, Figma
 Make, Webflow, etc.
 
 
-## What you can do with Onlook:
+## What you can do with Vespra Canvas:
 
 - [x] Create Next.js app in seconds
   - [x] Start from text or image
@@ -94,22 +86,21 @@ Make, Webflow, etc.
   - [x] Queue multiple messages at once
   - [ ] Use Images as references and as assets in a project
   - [ ] Setup and use MCPs in projects
-  - [ ] Allow Onlook to use itself as a toolcall for branch creation and iteration
+  - [ ] Allow Vespra Canvas to use itself as a toolcall for branch creation and iteration
 - [ ] Advanced project support
   - [ ] Support non-NextJS projects
   - [ ] Support non-Tailwind projects
 
-![Onlook-GitHub-Example](https://github.com/user-attachments/assets/642de37a-72cc-4056-8eb7-8eb42714cdc4)
+![Vespra Canvas-GitHub-Example](https://github.com/user-attachments/assets/642de37a-72cc-4056-8eb7-8eb42714cdc4)
 
 ## Getting Started
 
-Use our [hosted app](https://onlook.com) or
-[run locally](https://docs.onlook.com/developers/running-locally).
+[Run Vespra Canvas locally](docs/content/docs/developers/running-locally.mdx).
 
 ### Usage
 
-Onlook will run on any Next.js + TailwindCSS project, import your project into
-Onlook or start from scratch within the editor.
+Vespra Canvas will run on any Next.js + TailwindCSS project, import your project into
+Vespra Canvas or start from scratch within the editor.
 
 Use the AI chat to create or edit a project you're working on. At any time, you
 can always right-click an element to open up the exact location of the element
@@ -132,17 +123,17 @@ Preview the code side-by-side with your site design.
 
 <br>
 
-Use Onlook's editor toolbar to adjust Tailwind styles, directly manipulate
+Use Vespra Canvas's editor toolbar to adjust Tailwind styles, directly manipulate
 objects, and experiment with layouts.
 
 <img width="600" alt="image" src="assets/text-styling.png" />
 
 ## Documentation
 
-For full documentation, visit [docs.onlook.com](https://docs.onlook.com)
+For full documentation, see the [docs](docs/) in this repository.
 
-To see how to Contribute, visit
-[Contributing to Onlook](https://docs.onlook.com/developers) in our docs.
+To see how to contribute, visit
+[Contributing to Vespra Canvas](docs/content/docs/developers/index.mdx).
 
 ## How it works
 
@@ -161,7 +152,7 @@ displays DOM elements declaratively (e.g. jsx/tsx/html). We are focused on
 making it work well with Next.js and TailwindCSS for now.
 
 For a full walkthrough, check out our
-[Architecture Docs](https://docs.onlook.com/developers/architecture).
+[Architecture Docs](docs/content/docs/developers/architecture.mdx).
 
 ### Our Tech Stack
 
@@ -199,45 +190,43 @@ For a full walkthrough, check out our
 
 If you have a suggestion that would make this better, please fork the repo and
 create a pull request. You can also
-[open issues](https://github.com/onlook-dev/onlook/issues).
+[open issues](https://github.com/Vespra-Company/vespra-canvas/issues).
 
 See the [CONTRIBUTING.md](CONTRIBUTING.md) for instructions and code of conduct.
 
 #### Contributors
 
-<a href="https://github.com/onlook-dev/onlook/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=onlook-dev/onlook" />
+<a href="https://github.com/Vespra-Company/vespra-canvas/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Vespra-Company/vespra-canvas" />
 </a>
 
 ## Contact
 
 ![image](https://github.com/user-attachments/assets/60684b68-1925-4550-8efd-51a1509fc953)
 
-- Team: [Discord](https://discord.gg/hERDfFZCsH) -
-  [Twitter](https://twitter.com/onlookdev) -
-  [LinkedIn](https://www.linkedin.com/company/onlook-dev/) -
-  [Email](mailto:contact@onlook.com) - [YouTube](https://youtube.com/@onlookdev)
-- Project:
+- Repository:
+  [https://github.com/Vespra-Company/vespra-canvas](https://github.com/Vespra-Company/vespra-canvas)
+- Upstream project: Onlook by onlook-dev —
   [https://github.com/onlook-dev/onlook](https://github.com/onlook-dev/onlook)
-- Website: [https://onlook.com](https://onlook.com/?utm_source=github&utm_medium=readme&utm_campaign=waitlist-2026)
+- Community: [Discord](https://discord.gg/hERDfFZCsH)
 
 ## License
 
-Distributed under the Apache 2.0 License. See [LICENSE.md](LICENSE.md) for more
-information.
+Distributed under the Apache 2.0 License. See [LICENSE.md](LICENSE.md) and
+[NOTICE](NOTICE) for more information.
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/onlook-dev/studio.svg?style=for-the-badge
-[contributors-url]: https://github.com/onlook-dev/onlook/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/onlook-dev/studio.svg?style=for-the-badge
-[forks-url]: https://github.com/onlook-dev/onlook/network/members
-[stars-shield]: https://img.shields.io/github/stars/onlook-dev/studio.svg?style=for-the-badge
-[stars-url]: https://github.com/onlook-dev/onlook/stargazers
-[issues-shield]: https://img.shields.io/github/issues/onlook-dev/studio.svg?style=for-the-badge
-[issues-url]: https://github.com/onlook-dev/onlook/issues
-[license-shield]: https://img.shields.io/github/license/onlook-dev/studio.svg?style=for-the-badge
-[license-url]: https://github.com/onlook-dev/onlook/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/Vespra-Company/vespra-canvas.svg?style=for-the-badge
+[contributors-url]: https://github.com/Vespra-Company/vespra-canvas/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Vespra-Company/vespra-canvas.svg?style=for-the-badge
+[forks-url]: https://github.com/Vespra-Company/vespra-canvas/network/members
+[stars-shield]: https://img.shields.io/github/stars/Vespra-Company/vespra-canvas.svg?style=for-the-badge
+[stars-url]: https://github.com/Vespra-Company/vespra-canvas/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Vespra-Company/vespra-canvas.svg?style=for-the-badge
+[issues-url]: https://github.com/Vespra-Company/vespra-canvas/issues
+[license-shield]: https://img.shields.io/github/license/Vespra-Company/vespra-canvas.svg?style=for-the-badge
+[license-url]: https://github.com/Vespra-Company/vespra-canvas/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/company/onlook-dev
 [twitter-shield]: https://img.shields.io/badge/-Twitter-black?logo=x&colorB=555

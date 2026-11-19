@@ -165,7 +165,7 @@ Best regards,
 
                         <div className="border-t border-border-primary my-8" />
                         <p className="text-small text-muted-foreground/50 max-w-2xl text-balance">
-                            Existing paid plan users can continue using Onlook. New users – Please contact us or book a demo to get your team set up. If you're looking to self-host Onlook, please check out the <Link href="https://github.com/onlook-dev/onlook" target="_blank" className="underline">GitHub repository</Link> or reach out to us to schedule a call.
+                            Existing paid plan users can continue using Onlook. New users – Please contact us or book a demo to get your team set up. If you're looking to self-host Onlook, please check out the <Link href="https://github.com/Vespra-Company/vespra-canvas" target="_blank" className="underline">GitHub repository</Link> or reach out to us to schedule a call.
                         </p>
                     </div>
                 </div>

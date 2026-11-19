@@ -40,7 +40,7 @@ export const ExternalRoutes = {
     DOCS: 'https://docs.onlook.com',
     BLOG: 'https://onlook.substack.com',
     X: 'https://x.com/onlookdev',
-    GITHUB: 'https://github.com/onlook-dev/onlook',
+    GITHUB: 'https://github.com/Vespra-Company/vespra-canvas',
     CONTACT: 'mailto:contact@onlook.com',
     LINKEDIN: 'https://www.linkedin.com/company/onlook-dev/',
     YOUTUBE: 'https://www.youtube.com/@onlookdev',

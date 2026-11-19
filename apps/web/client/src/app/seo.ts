@@ -5,7 +5,7 @@ export const organizationSchema = {
     url: "https://onlook.com/",
     logo: "https://onlook.com/favicon.ico",
     sameAs: [
-        "https://github.com/onlook-dev/onlook",
+        "https://github.com/Vespra-Company/vespra-canvas",
         "https://twitter.com/onlookdev",
         "https://www.linkedin.com/company/onlook-dev/",
     ],
